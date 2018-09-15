@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    tools:context=".Main2Activity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="monospace"
+            android:text="Add new Event"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="19dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/titletext"
+        android:layout_width="292dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#cd616161"
+        android:ems="10"
+        android:hint="Title"
+        android:inputType="textPersonName"
+        android:singleLine="true"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="#cd616161"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/desctext"
+        android:layout_width="292dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#cd616161"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        android:singleLine="false"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="#cd616161"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titletext" />
+
+    <EditText
+        android:id="@+id/timetext"
+        android:layout_width="292dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#cd616161"
+        android:editable="false"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="Date"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="#cd616161"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:longClickable="false"
+        app:layout_constraintTop_toBottomOf="@+id/desctext" />
+
+    <EditText
+        android:id="@+id/timetext2"
+        android:layout_width="292dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#cd616161"
+        android:editable="false"
+        android:ems="10"
+        android:longClickable="false"
+        android:focusable="false"
+        android:hint="Time"
+        android:singleLine="false"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="#cd616161"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timetext" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="136dp"
+        android:text="Add"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.785"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timetext" />
+
+</android.support.constraint.ConstraintLayout>
