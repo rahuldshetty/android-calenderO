@@ -5,6 +5,12 @@
         android:id="@+id/menu_home"
         android:icon="@drawable/ic_home"
         android:title="Home"></item>
+
+    <item
+        android:id="@+id/menu_events"
+        android:icon="@drawable/ic_events"
+        android:title="Schedule"></item>
+
     <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/ic_settings"

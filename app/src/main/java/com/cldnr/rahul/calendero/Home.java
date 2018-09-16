@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,10 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
@@ -46,6 +50,10 @@ public class Home extends Fragment {
     ArrayList<Data> arrayList=new ArrayList<Data>();
 
     EventCursorAdapter adapter ;
+
+
+
+    SimpleDateFormat curFormater = new SimpleDateFormat("MM/dd/yy");
 
     FloatingActionButton fab;
 
@@ -78,12 +86,14 @@ public class Home extends Fragment {
 
         listView=view.findViewById(R.id.listview);
 
-
+        Date dateObj = Calendar.getInstance().getTime();
+        String curDate = curFormater.format(dateObj);
+        loadData(curDate);
 
         calenderView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int y, int m, int d) {
-                adapter.clear();
+
                 m=m+1;
                 y=y%100;
                 String month=""+m,day=""+d,year=""+y;
@@ -101,19 +111,8 @@ public class Home extends Fragment {
                 String dates=month+"/"+day+"/"+year;
 
 
-                String q="Select * from programTable where date='"+dates+"';" ;
-                Cursor resultSet = myDatabase.rawQuery(q,null);
 
-
-                try {
-                    while (resultSet.moveToNext()) {
-                        adapter.add(new Data(resultSet.getString(0),resultSet.getString(1),resultSet.getString(2)));
-                    }
-                } catch(Exception e) {
-                    System.out.println("Failed."+e);
-                    resultSet.close();
-                }
-
+                loadData(dates);
 
 
             }
@@ -136,6 +135,22 @@ public class Home extends Fragment {
         return view;
     }
 
+    public void loadData(String dates){
+        String q="Select * from programTable where date='"+dates+"';" ;
+        Cursor resultSet = myDatabase.rawQuery(q,null);
+        adapter.clear();
+
+        try {
+            while (resultSet.moveToNext()) {
+                adapter.add(new Data(resultSet.getString(0),resultSet.getString(1),resultSet.getString(2),resultSet.getString(3)));
+            }
+        } catch(Exception e) {
+            resultSet.close();
+        }
+
+
+    }
+
 
     public class EventCursorAdapter extends ArrayAdapter<Data>{
 
@@ -148,7 +163,7 @@ public class Home extends Fragment {
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-            Data data = getItem(position);
+            final Data data = getItem(position);
 
             if(convertView==null)
             {
@@ -166,6 +181,13 @@ public class Home extends Fragment {
             desc.setText(data.getDesc());
             time.setText(data.getTime());
 
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    myDatabase.execSQL("DELETE FROM  programTable WHERE title="+"'"+ data.getTitle() +"' and description=" + "'" + data.getDesc() + "' and time="+"'"+data.getTime()+"';"    );
+                    loadData(data.getDate());
+                }
+            });
 
             return convertView;
         }

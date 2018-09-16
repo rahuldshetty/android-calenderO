@@ -30,11 +30,16 @@ public class Data {
         this.time = time;
     }
 
-    public String title,desc,time;
+    public String title,desc,time,date;
 
-    public Data(String title, String desc, String time) {
+    public void setDate(String date){this.date=date;}
+
+    public String getDate(){return date;}
+
+    public Data(String title, String desc, String time,String date) {
         this.title = title;
         this.desc = desc;
         this.time = time;
+        this.date=date;
     }
 }

@@ -2,6 +2,7 @@ package com.cldnr.rahul.calendero;
 
 
 import android.content.res.ColorStateList;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
 
 
+    SQLiteDatabase myDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.main_toolbar);
 
+        myDatabase = openOrCreateDatabase("dbstorage",MODE_PRIVATE,null);
+        myDatabase.execSQL("CREATE TABLE IF NOT EXISTS programTable(title VARCHAR(15),description VARCHAR(50),time varchar(5),date varchar(10));");
 
         navigationView.setItemIconTintList(ColorStateList.valueOf(Color.WHITE));
         navigationView.setNavigationItemSelectedListener(this);
@@ -81,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.menu_settings:
                 loadFragment(new Settings());
+                break;
+
+            case R.id.menu_events:
+                loadFragment(new Events());
                 break;
 
 
